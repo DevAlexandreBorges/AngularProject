@@ -1,3 +1,4 @@
+@if (note.id !== -1){
 <div>
     <button>Editar</button>
     <button>Salvar</button>
@@ -7,8 +8,10 @@
         <p><input class="text conteudo" type="text" [(ngModel)]="note.conteudo" name="NoteTitle" placeholder="Anote suas tarefas,,," value={{note.conteudo}} readonly></p>
     </form>
 </div>
-
+} @else {
 <!-- Div de boas vindas, quando nenhuma nota foi selecionada -->
-<div>
-
+<div class="hello">
+    <h3>Seja bem vindo(a) ao Notes!</h3>
+    <img src="assets/Logo.png" class="image">
 </div>
+}

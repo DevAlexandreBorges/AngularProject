@@ -16,3 +16,16 @@
 .hide {
     display: none;
 }
+
+.hello {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.image {
+    background-color: rgb(163, 163, 163);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 30px;
+    max-width: 20%;
+    max-height: 40%;
+}
