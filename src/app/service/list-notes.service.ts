@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ListNotasService {
+export class ListNotesService {
 
   private apiUrl = 'http://localhost:3000/notes';
 
@@ -14,6 +14,10 @@ export class ListNotasService {
 
   getAll(): Observable<Note[]> {
     return this.http.get<Note[]>(this.apiUrl);
+  }
+
+  get(id: number): Observable<Note>{
+    return this.http.get<Note>(`${this.apiUrl}/${id}`)
   }
 
   add(note: Note){

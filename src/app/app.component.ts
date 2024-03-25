@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuLateralComponent } from './components/menu-lateral/menu-lateral.component';
@@ -15,4 +15,11 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'AngularProject';
+  noteId!: number;
+  @ViewChild(NotasComponent) notasComponent!: NotasComponent; 
+  
+  handleNoteIdEmiter(id: number){
+    //this.noteId = id;
+    this.notasComponent.getNote(id);
+  }
 }
