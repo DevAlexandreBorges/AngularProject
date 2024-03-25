@@ -1,2 +1,14 @@
-<h1>{{note?.titulo}}</h1>
-<p>notas works! {{note?.conteudo}}</p>
+<div>
+    <button>Editar</button>
+    <button>Salvar</button>
+    <button>Cancelar</button>
+    <form>
+        <input class="text title" type="text" [(ngModel)]="note.titulo" name="NoteTitle" placeholder="Digite o titulo aqui..." value={{note.titulo}}>
+        <p><input class="text conteudo" type="text" [(ngModel)]="note.conteudo" name="NoteTitle" placeholder="Anote suas tarefas,,," value={{note.conteudo}} readonly></p>
+    </form>
+</div>
+
+<!-- Div de boas vindas, quando nenhuma nota foi selecionada -->
+<div>
+
+</div>
