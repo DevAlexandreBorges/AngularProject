@@ -2,8 +2,8 @@
   <button>Nova nota</button>
   <ul>
     <li>Anotações</li>
-    @for (nota of notas; track $index){
-    <li (click)="onClickNota()">{{ nota }} <button>Excluir</button></li>
+    @for (note of notes; track $index){
+    <li (click)="onClickNote(note.id)">{{ note.titulo }} <button (click)="onClickRemove(note.id)">Excluir</button></li>
     } @empty { Sem Notas!<br />Crie uma nova anotação! }
   </ul>
 </div>

@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
-
+import { ListNotasService } from '../../service/list-notas.service';
+import { Note } from '../../Note';
 
 @Component({
   selector: 'app-menu-lateral',
@@ -10,11 +11,28 @@ import { Component, input } from '@angular/core';
 })
 export class MenuLateralComponent {
 
-  notas: string[] = ['nota1', 'nota2', 'nota3'];
+  notes: Note[] = [];
 
+  constructor(private listNotasService: ListNotasService){
+    this.getNotes();
+  }
 
-  onClickNota(){
+  getNotes(){
+    this.listNotasService.getAll().subscribe((notes) => (this.notes = notes));
+  }
+
+  onClickNote(index: number){
+
+  }
+
+  onClickRemove(index: number){
+    
+    this.notes = this.notes.filter((a) => index !== a.id);
+  }
+
+  onClickAdd(): void{
     
   }
+  
 
 }
