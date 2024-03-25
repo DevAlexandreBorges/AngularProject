@@ -1,0 +1,9 @@
+.menuNotas {
+    position: fixed;
+    margin-top: 35px;
+    height: 100%;
+    width: 25%;
+    background-color: #002e69;
+    color: white;
+    padding: 30px;
+}

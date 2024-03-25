@@ -1,1 +1,9 @@
-<p>menu-lateral works!</p>
+<div class="menuNotas">
+  <button>Nova nota</button>
+  <ul>
+    <li>Anotações</li>
+    @for (nota of notas; track $index){
+    <li (click)="onClickNota()">{{ nota }} <button>Excluir</button></li>
+    } @empty { Sem Notas!<br />Crie uma nova anotação! }
+  </ul>
+</div>

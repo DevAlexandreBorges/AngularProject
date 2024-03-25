@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+
 
 @Component({
   selector: 'app-menu-lateral',
@@ -8,5 +9,12 @@ import { Component } from '@angular/core';
   styleUrl: './menu-lateral.component.css'
 })
 export class MenuLateralComponent {
+
+  notas: string[] = ['nota1', 'nota2', 'nota3'];
+
+
+  onClickNota(){
+    
+  }
 
 }
