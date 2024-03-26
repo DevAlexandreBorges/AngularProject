@@ -20,7 +20,7 @@ export class MenuLateralComponent {
   }
 
   getNotes(){
-    this.listNotesService.getAll().subscribe((notes) => (this.notes = notes));
+    this.listNotesService.getAll().subscribe((notes) => {this.notes = notes.reverse(); this.notes = this.notes.reverse(); console.log(this.notes);});
   }
 
   onClickNote(index: number){

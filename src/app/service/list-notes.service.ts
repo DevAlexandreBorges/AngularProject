@@ -31,6 +31,10 @@ export class ListNotesService {
 
   private asyncAdd(note: Note, notes: Note[], execAfter: Function = ()=>{}){
     note.id = notes.length + 1;
+    this.dbAdd(note, execAfter);
+  }
+
+  private dbAdd(note: Note, execAfter: Function = ()=>{}){
     this.http.post<Note>(this.apiUrl, {id: `${note.id}`, titulo: note.titulo, conteudo: note.conteudo}).subscribe(() => {execAfter();});
   }
 
@@ -40,7 +44,7 @@ export class ListNotesService {
 
   edit(index: number, note: Note, execAfter: Function = ()=>{}){
     this.remove(index,() => {
-      this.add(note);
+      this.dbAdd(note);
     });
   }
 }
