@@ -2,6 +2,7 @@ import { Injectable, ViewChild, viewChild } from '@angular/core';
 import { Note } from '../Note';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { exit } from 'process';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,12 @@ export class ListNotesService {
   }
 
   private asyncAdd(note: Note, notes: Note[], execAfter: Function = ()=>{}){
-    note.id = notes.length + 1;
+    notes = notes.sort((a,b) => (a.id < b.id ? -1 : 1))
+    let index = 1;
+    if(notes.length > 0){
+      index = Number(notes[notes.length-1].id) + 1;
+    }
+    note.id = index;
     this.dbAdd(note, execAfter);
   }
 
@@ -44,7 +50,7 @@ export class ListNotesService {
 
   edit(index: number, note: Note, execAfter: Function = ()=>{}){
     this.remove(index,() => {
-      this.dbAdd(note);
+      this.dbAdd(note, () => execAfter());
     });
   }
 }
