@@ -1,8 +1,3 @@
 <app-header></app-header>
-<app-menu-lateral (handleNoteId)="handleNoteIdEmiter($event)" (handleNewNote)="handleNewNoteEmiter()"></app-menu-lateral>
-<!-- Conteudo principal -->
-<div class="body">
-  <app-notas (handleMenuUpdate)="handleMenuUpdateEmmiter()"></app-notas>
-</div>
-<!-- -->
+<router-outlet></router-outlet>
 <app-footer></app-footer>

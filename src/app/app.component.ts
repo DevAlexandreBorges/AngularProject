@@ -5,13 +5,12 @@ import { MenuLateralComponent } from './components/menu-lateral/menu-lateral.com
 import { FooterComponent } from './components/footer/footer.component';
 import { NotasComponent } from './components/notas/notas.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule, NgModel } from '@angular/forms';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, MenuLateralComponent, NotasComponent, HttpClientModule, FormsModule],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MenuLateralComponent, NotasComponent, HttpClientModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -19,18 +18,5 @@ import { FormsModule, NgModel } from '@angular/forms';
 export class AppComponent {
   title = 'AngularProject';
   
-  @ViewChild(NotasComponent) notasComponent!: NotasComponent; 
-  @ViewChild(MenuLateralComponent) menuLateralComponent!: MenuLateralComponent;
   
-  handleNoteIdEmiter(id: number){
-    this.notasComponent.getNote(id);
-  }
-
-  handleNewNoteEmiter(){
-    this.notasComponent.newNote();
-  }
-
-  handleMenuUpdateEmmiter(){
-    this.menuLateralComponent.getNotes();
-  }
 }
