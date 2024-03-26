@@ -11,6 +11,7 @@ import { Note } from '../../Note';
 })
 export class MenuLateralComponent {
   @Output() handleNoteId = new EventEmitter<number>();
+  @Output() handleNewNote = new EventEmitter<any>();
 
   notes: Note[] = [];
 
@@ -27,13 +28,13 @@ export class MenuLateralComponent {
   }
 
   onClickRemove(index: number){
-    
+    this.listNotesService.remove(index);
     this.notes = this.notes.filter((a) => index !== a.id);
+    this.handleNoteId.emit(-1);
   }
 
-  onClickAdd(): void{
-    
+  onClickNew(): void{
+    this.handleNewNote.emit();
   }
-  
 
 }

@@ -1,17 +1,19 @@
 @if (note.id !== -1){
 <div>
-    <button>Editar</button>
-    <button>Salvar</button>
-    <button>Cancelar</button>
+    <div class="alinharDireita">
+        <button class="button-dark margin" [hidden]="editableNote" (click)="editNote()">Editar</button>
+        <button  class="button-dark button-save margin secondMargin" [hidden]="!editableNote" (click)="saveNote()">Salvar</button>
+        <button class="button-dark button-cancel margin" [hidden]="!editableNote" (click)="cancelMofication()">Cancelar</button>
+    </div>
     <form>
-        <input class="text title" type="text" [(ngModel)]="note.titulo" name="NoteTitle" placeholder="Digite o titulo aqui..." value={{note.titulo}}>
-        <p><input class="text conteudo" type="text" [(ngModel)]="note.conteudo" name="NoteTitle" placeholder="Anote suas tarefas,,," value={{note.conteudo}} readonly></p>
+        <input class="text title" type="text" [(ngModel)]="note.titulo" name="NoteTitle" placeholder="Digite o titulo aqui..." value={{note.titulo}} [readOnly]="!editableNote">   
+        <p><textarea class="text conteudo" type="text" [(ngModel)]="note.conteudo" name="NoteConteudo" placeholder="Anote suas tarefas..." value={{note.conteudo}} [readOnly]="!editableNote"></textarea></p>
     </form>
 </div>
 } @else {
 <!-- Div de boas vindas, quando nenhuma nota foi selecionada -->
 <div class="hello">
     <h3>Seja bem vindo(a) ao Notes!</h3>
-    <img src="assets/Logo.png" class="image">
+    <img src="assets/Icon.png" class="image">
 </div>
 }

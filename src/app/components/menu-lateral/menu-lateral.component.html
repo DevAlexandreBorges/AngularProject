@@ -1,9 +1,16 @@
 <div class="menuNotas">
-  <button>Nova nota</button>
+  <button class="button-white buttonNew test" (click)="onClickNew()">Nova nota</button>
   <ul>
-    <li>Anotações</li>
+    <li class="li-title">Anotações</li>
+    <div class="scroll">
     @for (note of notes; track $index){
-    <li (click)="onClickNote(note.id)">{{ note.titulo }} <button (click)="onClickRemove(note.id)">Excluir</button></li>
-    } @empty { Sem Notas!<br />Crie uma nova anotação! }
+      <div class="itensGroup">
+      <div><img src="assets/delete.png" class="btn-noteDel" (click)="onClickRemove(note.id)"></div>
+      <div class="td-note"><Button class="btn-noteList" (click)="onClickNote(note.id)">{{ note.titulo }}</Button></div>
+      </div>
+    } @empty { 
+      <br>Você não tem notas recentes<br/>Crie uma nova anotação! 
+    }
+  </div>
   </ul>
 </div>

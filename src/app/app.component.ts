@@ -20,8 +20,17 @@ export class AppComponent {
   title = 'AngularProject';
   
   @ViewChild(NotasComponent) notasComponent!: NotasComponent; 
+  @ViewChild(MenuLateralComponent) menuLateralComponent!: MenuLateralComponent;
   
   handleNoteIdEmiter(id: number){
     this.notasComponent.getNote(id);
+  }
+
+  handleNewNoteEmiter(){
+    this.notasComponent.newNote();
+  }
+
+  handleMenuUpdateEmmiter(){
+    this.menuLateralComponent.getNotes();
   }
 }

@@ -7,10 +7,15 @@
 
 .title {
     font-size: 30px;
+    width: 100%;
 }
 
 .conteudo {
     font-size: 17px;
+    width: 100%;
+    height: calc(100% - 10px);
+    overflow-y: auto;
+    resize: none;
 }
 
 .hide {
@@ -28,4 +33,33 @@
     border-radius: 30px;
     max-width: 20%;
     max-height: 40%;
+}
+
+.margin {
+    margin-right: 1% !important;
+    margin-left: 1% !important;
+    margin-top: 5px;
+}
+
+.secondMargin {
+    margin-right: -7px !important;
+    margin-left: -7px !important;
+}
+
+form {
+    height: calc(100% - 40px);
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+div{
+    height: calc(100% - 15px);
+    width: 100%;
+}
+
+p {
+    overflow-y: auto;
+    height: calc(100% - 70px);
+    width: 100%;
 }
