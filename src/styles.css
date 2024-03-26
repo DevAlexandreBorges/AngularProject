@@ -22,6 +22,15 @@ body{
     height: calc(100% - 69px);
 }
 
+@media (max-width: 1552px) {
+  .body {
+    margin-top: 35px;
+    margin-left: 310px;
+    padding: 10px;
+    height: calc(100% - 69px);
+}
+}
+
 .alinharDireita {
     height: auto !important;
     width: 100% !important;
