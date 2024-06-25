@@ -1,7 +1,7 @@
 import { Injectable, ViewChild, viewChild } from '@angular/core';
 import { Note } from '../Note';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { exit } from 'process';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { exit } from 'process';
 })
 export class ListNotesService {
 
-  private apiUrl = 'http://localhost:3000/notes';
+  private apiUrl = 'http://localhost:3000/api/notes';
 
   constructor(private http: HttpClient) { }
 
@@ -17,40 +17,33 @@ export class ListNotesService {
     return this.http.get<Note[]>(this.apiUrl);
   }
 
-  get(id: number): Observable<Note>{
+  get(id: String ): Observable<Note>{
     return this.http.get<Note>(`${this.apiUrl}/${id}`);
   }
 
   add(note: Note, execAfter: Function = ()=>{}){
-    let notes!: Note[];
-    let obs: Observable<Note[]>;
-    obs = this.http.get<Note[]>(this.apiUrl);
-
-    obs.subscribe((_notes) => {notes = _notes; this.asyncAdd(note, notes, execAfter)});
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    this.http.post<Note>(this.apiUrl, note).subscribe(() => {execAfter();});
     
   }
 
-  private asyncAdd(note: Note, notes: Note[], execAfter: Function = ()=>{}){
-    notes = notes.sort((a,b) => (a.id < b.id ? -1 : 1))
-    let index = 1;
-    if(notes.length > 0){
-      index = Number(notes[notes.length-1].id) + 1;
-    }
-    note.id = index;
+  remove(index: String, execAfter: Function = ()=>{}){
+    this.http.delete<Note>(`${this.apiUrl}/${index}`).subscribe(() => {execAfter();});
+  }
+
+  edit(index: string, note: Note, execAfter: Function = ()=>{}){
+    this.http.put<Note>(`${this.apiUrl}/${index}`, note).subscribe(() => {execAfter();});
+  }
+
+  /*private asyncAdd(note: Note, notes: Note[], execAfter: Function = ()=>{}){
+    notes = notes.sort((a,b) => (a._id < b._id ? -1 : 1))
     this.dbAdd(note, execAfter);
   }
 
   private dbAdd(note: Note, execAfter: Function = ()=>{}){
-    this.http.post<Note>(this.apiUrl, {id: `${note.id}`, titulo: note.titulo, conteudo: note.conteudo}).subscribe(() => {execAfter();});
-  }
+    this.http.post<Note>(this.apiUrl, {_id: `${note._id}`, titulo: note.titulo, conteudo: note.conteudo}).subscribe(() => {execAfter();});
+  }*/
 
-  remove(index: number, execAfter: Function = ()=>{}){
-    this.http.delete<Note>(`${this.apiUrl}/${index}`).subscribe(() => {execAfter();});
-  }
-
-  edit(index: number, note: Note, execAfter: Function = ()=>{}){
-    this.remove(index,() => {
-      this.dbAdd(note, () => execAfter());
-    });
-  }
 }

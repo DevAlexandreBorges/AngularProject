@@ -1,4 +1,4 @@
-@if (note.id !== -1){
+@if (note._id !== "-1"){
 <div>
     <div class="alinharDireita">
         <button class="button-dark margin" [hidden]="editableNote" (click)="editNote()">Editar</button>
@@ -7,7 +7,7 @@
     </div>
     <form>
         <input class="text title" type="text" [(ngModel)]="note.titulo" name="NoteTitle" placeholder="Digite o titulo aqui..." [value]= "note.titulo" [readOnly]="!editableNote">   
-        <p><textarea class="text conteudo" type="text" [(ngModel)]="note.conteudo" name="NoteConteudo" placeholder="Anote suas tarefas..." [value]="note.conteudo" [readOnly]="!editableNote"></textarea></p>
+        <p><textarea class="text conteudo" type="text" [(ngModel)]="note.conteudo"name="NoteConteudo" placeholder="Anote suas tarefas..." [value]="note.conteudo" [readOnly]="!editableNote"></textarea></p>
     </form>
 </div>
 } @else {

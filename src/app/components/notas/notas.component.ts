@@ -14,27 +14,35 @@ import { FormsModule, NgModel } from '@angular/forms';
 export class NotasComponent {
   @Output() handleMenuUpdate = new EventEmitter<any>();
   
-  note: Note = {id: -1, titulo: "", conteudo: ""};
+  note: Note = {_id: "-1", titulo: "", conteudo: ""};
 
   editableNote: boolean = false;
 
-  private readonly NEWNOTE = -2;
+  private readonly NEWNOTE = "-2";
 
-  constructor(private listNotesService: ListNotesService){
+  constructor(private listNotesService: ListNotesService){ }
 
-  }
-
-  getNote(index: number){
-    if(index < 0){
-      this.note = {id: -1, titulo: "", conteudo: ""};
+  getNote(index: string){
+    if(!isNaN(parseInt(index)) && parseInt(index) < 0){
+      this.note = {_id: "-1", titulo: "", conteudo: ""};
       return;
     }
-    this.listNotesService.get(index).subscribe((note) => (this.note = note));
+    this.listNotesService.get(index).subscribe((note) => {this.note = note});
+    this.editableNote = false;
+  }
+
+  saveNote(){
+    if(this.note._id === this.NEWNOTE){
+      this.listNotesService.add(this.note, () => {this.handleMenuUpdate.emit();});
+      this.editableNote = false;
+      return;
+    }
+    this.listNotesService.edit(this.note._id, this.note, () => {this.handleMenuUpdate.emit();});
     this.editableNote = false;
   }
 
   newNote(){
-    this.note = {id: this.NEWNOTE, titulo: "", conteudo: ""};
+    this.note = {_id: this.NEWNOTE, titulo: "", conteudo: ""};
     this.editableNote = true;
   }
 
@@ -42,22 +50,12 @@ export class NotasComponent {
     this.editableNote = true;
   }
 
-  saveNote(){
-    if(this.note.id === this.NEWNOTE){
-      this.listNotesService.add(this.note, () => {this.handleMenuUpdate.emit();});
-      this.editableNote = false;
-      return;
-    }
-    this.listNotesService.edit(this.note.id, this.note, () => {this.handleMenuUpdate.emit();});
-    this.editableNote = false;
-  }
-
   cancelMofication(){
-    if(this.note.id === this.NEWNOTE){
-      this.note = {id: -1, titulo: "", conteudo: ""};
+    if(this.note._id === this.NEWNOTE){
+      this.note = {_id: "-1", titulo: "", conteudo: ""};
       return;
     }
-    this.getNote(this.note.id);
+    this.getNote(this.note._id);
     this.editableNote = false;
   }
 

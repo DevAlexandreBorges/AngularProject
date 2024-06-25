@@ -14,7 +14,7 @@ export class AppMainComponent {
   @ViewChild(NotasComponent) notasComponent!: NotasComponent; 
   @ViewChild(MenuLateralComponent) menuLateralComponent!: MenuLateralComponent;
   
-  handleNoteIdEmiter(id: number){
+  handleNoteIdEmiter(id: string){
     this.notasComponent.getNote(id);
   }
 

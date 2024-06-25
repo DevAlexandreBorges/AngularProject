@@ -10,10 +10,11 @@ import { Note } from '../../Note';
   styleUrl: './menu-lateral.component.css'
 })
 export class MenuLateralComponent {
-  @Output() handleNoteId = new EventEmitter<number>();
+  @Output() handleNoteId = new EventEmitter<string>();
   @Output() handleNewNote = new EventEmitter<any>();
 
   notes: Note[] = [];
+  teste: string = "";
 
   constructor(private listNotesService: ListNotesService){
     this.getNotes();
@@ -23,14 +24,14 @@ export class MenuLateralComponent {
     this.listNotesService.getAll().subscribe((notes) => {this.notes = notes; this.notes = this.notes.sort((a,b) => (a.titulo < b.titulo ? -1 : 1));});
   }
 
-  onClickNote(index: number){
+  onClickNote(index: string){
     this.handleNoteId.emit(index);
   }
 
-  onClickRemove(index: number){
+  onClickRemove(index: string){
     this.listNotesService.remove(index);
-    this.notes = this.notes.filter((a) => index !== a.id);
-    this.handleNoteId.emit(-1);
+    this.notes = this.notes.filter((a) => index !== a._id);
+    this.handleNoteId.emit("-1");
   }
 
   onClickNew(): void{
